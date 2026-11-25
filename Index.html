@@ -1,0 +1,1679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Optimore Solutions Ltd | Magic in every step</title>
+  <style>
+    :root {
+      --blue-primary: #0066B3;
+      --blue-dark: #003366;
+      --blue-light: #EBF5FF;
+      --orange-accent: #F37021;
+      --orange-hover: #D95D12;
+      --bg-light: #F8FAFC;
+      --text-main: #1E293B;
+      --text-muted: #64748B;
+      --border-color: #E2E8F0;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--white);
+      color: var(--text-main);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ================= NAVIGATION ================= */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.97);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 2px 12px rgba(0, 51, 102, 0.06);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .brand-text h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--blue-primary);
+      line-height: 1.1;
+      letter-spacing: 0.3px;
+    }
+
+    .brand-text h1 span {
+      color: var(--orange-accent);
+    }
+
+    .brand-text p {
+      font-size: 11.5px;
+      color: var(--blue-dark);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+
+    .nav-links button {
+      background: transparent;
+      border: none;
+      padding: 9px 16px;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .nav-links button:hover {
+      background: var(--blue-light);
+      color: var(--blue-primary);
+    }
+
+    .nav-links button.active {
+      background: var(--blue-primary);
+      color: var(--white);
+    }
+
+    .nav-cta {
+      background: var(--orange-accent) !important;
+      color: var(--white) !important;
+      margin-left: 6px;
+    }
+
+    .nav-cta:hover {
+      background: var(--orange-hover) !important;
+    }
+
+    .mobile-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border-color);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 20px;
+      cursor: pointer;
+      color: var(--blue-dark);
+    }
+
+    /* ================= PAGE VIEWS ================= */
+    .page-section {
+      display: none;
+      animation: fadeIn 0.35s ease;
+    }
+
+    .page-section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 64px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 48px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(243, 112, 33, 0.12);
+      color: var(--orange-accent);
+      font-weight: 700;
+      font-size: 12.5px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      margin-bottom: 12px;
+    }
+
+    .section-header h2 {
+      font-size: 34px;
+      color: var(--blue-dark);
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 16.5px;
+    }
+
+    /* ================= HERO CAROUSEL (5 FULL-SIZE SLIDES) ================= */
+    .hero-carousel {
+      position: relative;
+      width: 100%;
+      height: 580px;
+      overflow: hidden;
+      background: var(--blue-dark);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.7s ease, visibility 0.7s ease;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(95deg, rgba(0, 31, 63, 0.92) 0%, rgba(0, 51, 102, 0.75) 55%, rgba(0, 51, 102, 0.35) 100%);
+    }
+
+    .slide-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 24px;
+      color: var(--white);
+    }
+
+    .slide-tag {
+      display: inline-block;
+      background: var(--orange-accent);
+      color: var(--white);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 6px;
+      margin-bottom: 16px;
+    }
+
+    .slide-content h2 {
+      font-size: 44px;
+      font-weight: 800;
+      max-width: 680px;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .slide-content p {
+      font-size: 18px;
+      max-width: 600px;
+      color: #E2E8F0;
+      margin-bottom: 28px;
+    }
+
+    .slide-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-primary {
+      background: var(--orange-accent);
+      color: var(--white);
+      border: none;
+      padding: 14px 26px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: var(--orange-hover);
+    }
+
+    .btn-outline {
+      background: rgba(255, 255, 255, 0.12);
+      color: var(--white);
+      border: 1.5px solid rgba(255, 255, 255, 0.65);
+      padding: 14px 26px;
+      font-size: 15px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--blue-dark);
+    }
+
+    .carousel-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 5;
+      background: rgba(255, 255, 255, 0.18);
+      color: var(--white);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      font-size: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .carousel-arrow:hover {
+      background: var(--orange-accent);
+      border-color: var(--orange-accent);
+    }
+
+    .carousel-arrow.prev { left: 18px; }
+    .carousel-arrow.next { right: 18px; }
+
+    .carousel-tabs {
+      position: absolute;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      width: 92%;
+      max-width: 1000px;
+    }
+
+    .carousel-tab {
+      background: rgba(15, 23, 42, 0.65);
+      color: #CBD5E1;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .carousel-tab.active,
+    .carousel-tab:hover {
+      background: var(--orange-accent);
+      color: var(--white);
+      border-color: var(--orange-accent);
+    }
+
+    /* ================= HOME SECTIONS ================= */
+    .exec-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .philosophy-quote {
+      margin-top: 22px;
+      padding: 20px 24px;
+      background: var(--blue-light);
+      border-left: 5px solid var(--orange-accent);
+      border-radius: 0 10px 10px 0;
+      font-style: italic;
+      font-weight: 600;
+      color: var(--blue-dark);
+      font-size: 16px;
+    }
+
+    .visual-card-img {
+      width: 100%;
+      height: 360px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 16px 36px rgba(0, 51, 102, 0.14);
+    }
+
+    .bg-soft {
+      background: var(--bg-light);
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+
+    .pillar-card {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 20px rgba(15, 23, 42, 0.04);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 14px 30px rgba(0, 51, 102, 0.1);
+    }
+
+    .pillar-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+    }
+
+    .pillar-body {
+      padding: 24px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .pillar-num {
+      color: var(--orange-accent);
+      font-weight: 800;
+      font-size: 13px;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+
+    .pillar-body h3 {
+      color: var(--blue-dark);
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+
+    .pillar-body p {
+      color: var(--text-muted);
+      font-size: 14.5px;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+
+    .link-btn {
+      background: none;
+      border: none;
+      color: var(--blue-primary);
+      font-weight: 700;
+      font-size: 14px;
+      cursor: pointer;
+      text-align: left;
+      padding: 0;
+    }
+
+    .link-btn:hover {
+      color: var(--orange-accent);
+    }
+
+    /* ================= SME KENYA BANNER ================= */
+    .sme-banner {
+      background: linear-gradient(135deg, var(--blue-dark), var(--blue-primary));
+      color: var(--white);
+      border-radius: 18px;
+      padding: 48px 40px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .sme-banner h2 {
+      font-size: 30px;
+      margin-bottom: 14px;
+    }
+
+    .sme-banner p {
+      color: #DBEAFE;
+      margin-bottom: 20px;
+    }
+
+    .sme-list {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .sme-list li::before {
+      content: "✓ ";
+      color: var(--orange-accent);
+      font-weight: 800;
+    }
+
+    /* ================= ABOUT PAGE ================= */
+    .mv-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-bottom: 56px;
+    }
+
+    .mv-card {
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-top: 5px solid var(--blue-primary);
+      border-radius: 14px;
+      padding: 32px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+    }
+
+    .mv-card.vision {
+      border-top-color: var(--orange-accent);
+    }
+
+    .mv-card h3 {
+      color: var(--blue-dark);
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .advantage-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 22px;
+    }
+
+    .adv-box {
+      background: var(--bg-light);
+      padding: 26px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .adv-box h4 {
+      color: var(--blue-primary);
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    /* ================= SERVICES PAGE (ALL 18 OFFERINGS) ================= */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 40px;
+    }
+
+    .filter-btn {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--blue-primary);
+      color: var(--white);
+      border-color: var(--blue-primary);
+    }
+
+    .division-block {
+      margin-bottom: 52px;
+      background: var(--white);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 26px rgba(15, 23, 42, 0.05);
+    }
+
+    .division-banner {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      background: linear-gradient(90deg, var(--blue-dark), var(--blue-primary));
+      color: var(--white);
+    }
+
+    .division-banner img {
+      width: 100%;
+      height: 100%;
+      min-height: 190px;
+      object-fit: cover;
+    }
+
+    .division-banner-info {
+      padding: 28px 32px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .division-banner-info span {
+      color: #FDBA74;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .division-banner-info h3 {
+      font-size: 26px;
+      margin: 6px 0 10px;
+    }
+
+    .division-banner-info p {
+      color: #E2E8F0;
+      font-size: 15px;
+    }
+
+    .subservices-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+      padding: 28px;
+    }
+
+    .subservice-card {
+      background: var(--bg-light);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .subservice-card h4 {
+      color: var(--blue-dark);
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .subservice-card p {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .inquire-mini-btn {
+      align-self: flex-start;
+      background: var(--white);
+      color: var(--orange-accent);
+      border: 1px solid var(--orange-accent);
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .inquire-mini-btn:hover {
+      background: var(--orange-accent);
+      color: var(--white);
+    }
+
+    /* ================= CONTACTS PAGE ================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.35fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    .info-card {
+      background: linear-gradient(145deg, var(--blue-dark), var(--blue-primary));
+      color: var(--white);
+      padding: 36px 30px;
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 51, 102, 0.15);
+    }
+
+    .info-card h3 {
+      font-size: 22px;
+      margin-bottom: 6px;
+    }
+
+    .info-card .tagline {
+      color: #CBD5E1;
+      font-size: 14px;
+      margin-bottom: 28px;
+      font-style: italic;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 24px;
+    }
+
+    .info-icon {
+      width: 42px;
+      height: 42px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .info-details strong {
+      display: block;
+      font-size: 12.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #93C5FD;
+      margin-bottom: 3px;
+    }
+
+    .info-details a,
+    .info-details p {
+      color: var(--white);
+      text-decoration: none;
+      font-size: 15.5px;
+      font-weight: 500;
+    }
+
+    .info-details a:hover {
+      text-decoration: underline;
+    }
+
+    .copy-btn {
+      margin-top: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      color: var(--white);
+      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover {
+      background: var(--orange-accent);
+      border-color: var(--orange-accent);
+    }
+
+    .form-card {
+      background: var(--bg-light);
+      padding: 36px 32px;
+      border-radius: 14px;
+      border: 1px solid var(--border-color);
+    }
+
+    .form-card h3 {
+      color: var(--blue-dark);
+      font-size: 21px;
+      margin-bottom: 20px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid #CBD5E1;
+      border-radius: 8px;
+      font-size: 14.5px;
+      background: var(--white);
+      color: var(--text-main);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue-primary);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--orange-accent);
+      color: var(--white);
+      border: none;
+      padding: 14px;
+      font-size: 15.5px;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .submit-btn:hover {
+      background: var(--orange-hover);
+    }
+
+    .status-msg {
+      display: none;
+      margin-top: 14px;
+      padding: 12px;
+      background: #DCFCE7;
+      color: #166534;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    /* ================= FOOTER ================= */
+    footer {
+      background: #0F172A;
+      color: #CBD5E1;
+      padding: 48px 24px 24px;
+    }
+
+    .footer-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr;
+      gap: 36px;
+      padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-grid h4 {
+      color: var(--white);
+      margin-bottom: 14px;
+      font-size: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 8px;
+    }
+
+    .footer-links button {
+      background: none;
+      border: none;
+      color: #CBD5E1;
+      cursor: pointer;
+      font-size: 14px;
+      text-align: left;
+    }
+
+    .footer-links button:hover {
+      color: var(--orange-accent);
+    }
+
+    .footer-bottom {
+      max-width: 1200px;
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 13px;
+      color: #94A3B8;
+    }
+
+    /* ================= RESPONSIVE ================= */
+    @media (max-width: 900px) {
+      .exec-grid,
+      .sme-banner,
+      .mv-grid,
+      .contact-grid,
+      .division-banner {
+        grid-template-columns: 1fr;
+      }
+
+      .slide-content h2 {
+        font-size: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .mobile-toggle {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 66px;
+        left: 0;
+        right: 0;
+        background: var(--white);
+        flex-direction: column;
+        padding: 16px;
+        border-bottom: 1px solid var(--border-color);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links button {
+        width: 100%;
+        text-align: left;
+      }
+
+      .hero-carousel {
+        height: 620px;
+      }
+
+      .form-row,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= HEADER & NAVIGATION ================= -->
+  <header>
+    <div class="nav-container">
+      <div class="brand" onclick="navigateTo('home')">
+        <!-- Brand Ribbon SVG Logo -->
+        <svg width="46" height="36" viewBox="0 0 120 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="36" cy="46" rx="28" ry="26" stroke="#0066B3" stroke-width="14"/>
+          <path d="M16 62C26 74 48 74 58 60" stroke="#003366" stroke-width="10" stroke-linecap="round"/>
+          <path d="M72 22H106L94 36H76C68 36 68 46 78 46H94C108 46 110 70 90 70H64" stroke="#0066B3" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M68 20L86 20L76 34Z" fill="#F37021"/>
+        </svg>
+        <div class="brand-text">
+          <h1>OPTIMORE <span>SOLUTIONS</span> LTD</h1>
+          <p>Magic in every step</p>
+        </div>
+      </div>
+
+      <button class="mobile-toggle" onclick="toggleMobileMenu()" aria-label="Menu">☰</button>
+
+      <ul class="nav-links" id="navLinks">
+        <li><button class="nav-btn active" data-page="home" onclick="navigateTo('home')">Home</button></li>
+        <li><button class="nav-btn" data-page="about" onclick="navigateTo('about')">About Us</button></li>
+        <li><button class="nav-btn" data-page="services" onclick="navigateTo('services')">Services</button></li>
+        <li><button class="nav-btn" data-page="contacts" onclick="navigateTo('contacts')">Contacts</button></li>
+        <li><button class="nav-cta" onclick="navigateTo('contacts')">Partner With Us</button></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ================= 1. HOME PAGE ================= -->
+  <main id="page-home" class="page-section active">
+
+    <!-- 5 Full-Size Photographic Sliding Banners -->
+    <section class="hero-carousel" id="heroCarousel">
+      <!-- Slide 1: Strategic Consultancy -->
+      <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1600&q=80');">
+        <div class="slide-content">
+          <span class="slide-tag">01 • Strategic & Management Consultancy</span>
+          <h2>Bridging Corporate Excellence & Digital Innovation</h2>
+          <p>High-level corporate governance, organizational development, ESG compliance, and business advisory built for sustainable growth.</p>
+          <div class="slide-actions">
+            <button class="btn-primary" onclick="navigateTo('services', 'consultancy')">Explore Consultancy</button>
+            <button class="btn-outline" onclick="navigateTo('contacts')">Book a Consultation</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 2: Branding & Visual Identity -->
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=1600&q=80');">
+        <div class="slide-content">
+          <span class="slide-tag">02 • Branding & Visual Identity</span>
+          <h2>Stand Out in Kenya’s Competitive Marketplace</h2>
+          <p>Distinctive brand strategy, visual identity systems, brand voice guidelines, and professional multimedia production for ambitious SMEs.</p>
+          <div class="slide-actions">
+            <button class="btn-primary" onclick="navigateTo('services', 'digital')">View Branding & Digital</button>
+            <button class="btn-outline" onclick="inquireService('Branding & Visual Identity')">Request a Brand Audit</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 3: Social Media & Direct Marketing -->
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1600&q=80');">
+        <div class="slide-content">
+          <span class="slide-tag">03 • Social Media & Direct Marketing</span>
+          <h2>Turn Digital Engagement Into Measurable SME Growth</h2>
+          <p>Targeted multi-channel social media management, SEO, PPC performance marketing, web development, and high-converting content strategy.</p>
+          <div class="slide-actions">
+            <button class="btn-primary" onclick="navigateTo('services', 'digital')">Explore Digital Marketing</button>
+            <button class="btn-outline" onclick="inquireService('Social Media & Direct Marketing')">Grow Your Online Reach</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 4: Empowerment, Keynotes & Talks -->
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=1600&q=80');">
+        <div class="slide-content">
+          <span class="slide-tag">04 • Empowerment, Keynotes & Talks</span>
+          <h2>Inspiring Leaders, Aligning Teams & Empowering Communities</h2>
+          <p>Interactive corporate workshops, executive retreats, one-on-one coaching, and educational digital talk shows.</p>
+          <div class="slide-actions">
+            <button class="btn-primary" onclick="navigateTo('services', 'empowerment')">Explore Talks & Coaching</button>
+            <button class="btn-outline" onclick="inquireService('Keynotes & Workshops')">Book a Keynote or Workshop</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slide 5: Publishing & E-Learning -->
+      <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=1600&q=80');">
+        <div class="slide-content">
+          <span class="slide-tag">05 • Publishing & Educational Architecture</span>
+          <h2>Authoritative Publications & Custom E-Learning Systems</h2>
+          <p>Corporate annual reports, industry whitepapers, research manuscripts, and scalable custom Learning Management Systems (LMS).</p>
+          <div class="slide-actions">
+            <button class="btn-primary" onclick="navigateTo('services', 'publishing')">Explore Publishing & LMS</button>
+            <button class="btn-outline" onclick="inquireService('E-Learning Platforms')">Launch an E-Learning Portal</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="carousel-arrow prev" onclick="changeSlide(-1)" aria-label="Previous Slide">❮</button>
+      <button class="carousel-arrow next" onclick="changeSlide(1)" aria-label="Next Slide">❯</button>
+
+      <div class="carousel-tabs">
+        <button class="carousel-tab active" onclick="goToSlide(0)">01. Consultancy</button>
+        <button class="carousel-tab" onclick="goToSlide(1)">02. Branding</button>
+        <button class="carousel-tab" onclick="goToSlide(2)">03. Social Media</button>
+        <button class="carousel-tab" onclick="goToSlide(3)">04. Talks & Coaching</button>
+        <button class="carousel-tab" onclick="goToSlide(4)">05. Publishing & LMS</button>
+      </div>
+    </section>
+
+    <!-- Executive Summary -->
+    <section class="container">
+      <div class="exec-grid">
+        <div>
+          <span class="badge">Executive Summary</span>
+          <h2 style="font-size: 32px; color: var(--blue-dark); margin-bottom: 16px;">Your All-in-One Partner for Governance, Branding & Digital Execution</h2>
+          <p style="color: var(--text-muted); margin-bottom: 16px;">
+            <strong>OPTIMORE SOLUTIONS LTD</strong> is a premier multidisciplinary firm established to bridge the gap between traditional corporate governance, strategic advisory, and modern digital execution.
+          </p>
+          <p style="color: var(--text-muted);">
+            In an era defined by rapid technological shifts and dynamic regulatory environments, organizations and growing SMEs often face the burden of managing disparate service providers. Optimore Solutions solves this by offering a comprehensive, integrated service model—acting as an all-in-one destination for governance consulting, brand acceleration, capacity building, and knowledge production.
+          </p>
+          <div class="philosophy-quote">
+            “Harmonizing strategic governance with creative digital execution to drive long-term value creation.”
+          </div>
+        </div>
+        <div>
+          <img class="visual-card-img" src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1000&q=80" alt="Optimore Solutions Team Strategy" />
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Core Divisions Preview -->
+    <section class="bg-soft">
+      <div class="container">
+        <div class="section-header">
+          <span class="badge">Core Competencies</span>
+          <h2>Four Integrated Divisions Under One Roof</h2>
+          <p>Eliminating vendor friction by uniting board-level advisory directly with digital execution, team empowerment, and publishing.</p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=800&q=80" alt="Strategic Consultancy" />
+            <div class="pillar-body">
+              <span class="pillar-num">DIVISION 01</span>
+              <h3>Strategic & Management Consultancy</h3>
+              <p>Corporate Governance, Organizational Development (OD), Ethics & Compliance, ESG Consulting, Crisis Management, and Business Advisory.</p>
+              <button class="link-btn" onclick="navigateTo('services', 'consultancy')">View All 6 Services →</button>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=800&q=80" alt="Digital Solutions & Branding" />
+            <div class="pillar-body">
+              <span class="pillar-num">DIVISION 02</span>
+              <h3>Digital Solutions & Media Production</h3>
+              <p>Branding & Visual Identity, Social Media & Direct Marketing, Web Design & Development, SEO & PPC, Multimedia Production, and Content Strategy.</p>
+              <button class="link-btn" onclick="navigateTo('services', 'digital')">View All 6 Services →</button>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <img src="https://images.unsplash.com/photo-1515187029135-18ee286d815b?auto=format&fit=crop&w=800&q=80" alt="Empowerment & Keynotes" />
+            <div class="pillar-body">
+              <span class="pillar-num">DIVISION 03</span>
+              <h3>Empowerment, Keynotes & Community</h3>
+              <p>Keynotes & Workshops, Executive & Personal Coaching, and Educational Digital Media & YouTube Talk Shows.</p>
+              <button class="link-btn" onclick="navigateTo('services', 'empowerment')">View All 3 Services →</button>
+            </div>
+          </div>
+
+          <div class="pillar-card">
+            <img src="https://images.unsplash.com/photo-1497633762265-9d179a990aa6?auto=format&fit=crop&w=800&q=80" alt="Publishing & E-Learning" />
+            <div class="pillar-body">
+              <span class="pillar-num">DIVISION 04</span>
+              <h3>Publishing & Educational Architecture</h3>
+              <p>Corporate Publications, Custom E-Learning Platforms (LMS), and Empirical Research & Advisory Papers.</p>
+              <button class="link-btn" onclick="navigateTo('services', 'publishing')">View All 3 Services →</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tailored for SMEs in Kenya -->
+    <section class="container">
+      <div class="sme-banner">
+        <div>
+          <span class="badge" style="background: rgba(255,255,255,0.16); color: #FDBA74;">Built for Growing SMEs in Kenya</span>
+          <h2>Scale Your Kenyan SME Without Managing Five Different Agencies</h2>
+          <p>Whether you are formalizing your business operations in Nairobi or scaling customer acquisition across East Africa, we provide practical, high-ROI frameworks tailored to your budget and stage of growth.</p>
+          <ul class="sme-list">
+            <li>Operational structuring, HR architecture & compliance readiness</li>
+            <li>Complete brand identity, social media management & lead-generating websites</li>
+            <li>Staff training workshops, leadership coaching & digital course creation</li>
+          </ul>
+          <br />
+          <button class="btn-primary" onclick="navigateTo('contacts')">Schedule an SME Strategy Call</button>
+        </div>
+        <div>
+          <img class="visual-card-img" style="height: 310px;" src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=900&q=80" alt="Kenyan Business Leaders Collaborating" />
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ================= 2. ABOUT US PAGE ================= -->
+  <main id="page-about" class="page-section">
+    <section class="bg-soft">
+      <div class="container" style="padding-bottom: 40px;">
+        <div class="section-header" style="margin-bottom: 0;">
+          <span class="badge">About Optimore Solutions Ltd</span>
+          <h2>An Integrated Multidisciplinary Ecosystem</h2>
+          <p>Consultancy • Digital Execution • Empowerment • Publishing</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="exec-grid" style="margin-bottom: 56px;">
+        <div>
+          <h3 style="font-size: 26px; color: var(--blue-dark); margin-bottom: 14px;">Who We Are</h3>
+          <p style="color: var(--text-muted); margin-bottom: 14px;">
+            Optimore Solutions Ltd was founded to eliminate the disconnect between strategic boardroom planning and modern digital execution. Many institutions and SMEs hire one consultant for strategy, another agency for branding and social media, and separate trainers for staff capacity building—resulting in fragmented messaging and wasted resources.
+          </p>
+          <p style="color: var(--text-muted);">
+            Our multidisciplinary model brings corporate governance advisors, brand strategists, full-stack developers, executive coaches, and publishing specialists together under one roof—delivering <em>“Magic in every step.”</em>
+          </p>
+        </div>
+        <div>
+          <img class="visual-card-img" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1000&q=80" alt="Optimore Multidisciplinary Team" />
+        </div>
+      </div>
+
+      <!-- Mission & Vision -->
+      <div class="mv-grid">
+        <div class="mv-card">
+          <span class="badge">Our Purpose</span>
+          <h3>Mission Statement</h3>
+          <p style="color: var(--text-muted);">
+            To drive organizational excellence and digital transformation for businesses and individuals alike, serving as the ultimate target-driven partner for corporate governance, personal development, and digital capability.
+          </p>
+        </div>
+        <div class="mv-card vision">
+          <span class="badge">Our Future</span>
+          <h3>Vision Statement</h3>
+          <p style="color: var(--text-muted);">
+            To be the leading multidisciplinary firm bridging traditional organizational advisory with cutting-edge digital solutions, empowering global institutions and individuals to adapt, innovate, and thrive.
+          </p>
+        </div>
+      </div>
+
+      <!-- Value Proposition -->
+      <div class="section-header">
+        <span class="badge">Why Choose Us</span>
+        <h2>The Optimore Advantage</h2>
+      </div>
+      <div class="advantage-grid">
+        <div class="adv-box">
+          <h4>1. All-in-One Synergy</h4>
+          <p style="color: var(--text-muted); font-size: 14.5px;">Eliminates vendor friction by unifying strategic governance advisory directly with digital creative teams.</p>
+        </div>
+        <div class="adv-box">
+          <h4>2. End-to-End Execution</h4>
+          <p style="color: var(--text-muted); font-size: 14.5px;">Transitions clients seamlessly from board-level strategy formulation to ground-level implementation.</p>
+        </div>
+        <div class="adv-box">
+          <h4>3. Tailored Frameworks</h4>
+          <p style="color: var(--text-muted); font-size: 14.5px;">Customized solutions engineered specifically for growing SMEs, large corporations, and public entities.</p>
+        </div>
+        <div class="adv-box">
+          <h4>4. Knowledge-Centric</h4>
+          <p style="color: var(--text-muted); font-size: 14.5px;">Driven by ongoing research, publishing capabilities, and executive-level content creation.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 3. SERVICES PAGE (COMPLETE PROFILE) ================= -->
+  <main id="page-services" class="page-section">
+    <section class="bg-soft">
+      <div class="container" style="padding-bottom: 36px;">
+        <div class="section-header" style="margin-bottom: 0;">
+          <span class="badge">Core Competencies & Service Offerings</span>
+          <h2>Complete Solutions for Governance, Brand & Growth</h2>
+          <p>Explore all 18 specialized offerings across our four core divisions.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <!-- Category Filter Buttons -->
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filterServices('all', this)">All Divisions (18 Services)</button>
+        <button class="filter-btn" onclick="filterServices('consultancy', this)">01. Strategic Consultancy</button>
+        <button class="filter-btn" onclick="filterServices('digital', this)">02. Digital, Branding & Social Media</button>
+        <button class="filter-btn" onclick="filterServices('empowerment', this)">03. Empowerment & Keynotes</button>
+        <button class="filter-btn" onclick="filterServices('publishing', this)">04. Publishing & E-Learning</button>
+      </div>
+
+      <!-- DIVISION 01 -->
+      <div class="division-block" data-category="consultancy" id="div-consultancy">
+        <div class="division-banner">
+          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Strategic Consultancy" />
+          <div class="division-banner-info">
+            <span>Division 01</span>
+            <h3>Strategic & Management Consultancy</h3>
+            <p>High-level advisory services designed to fortify structural integrity, ensure regulatory alignment, and prepare organizations for sustainable growth.</p>
+          </div>
+        </div>
+        <div class="subservices-grid">
+          <div class="subservice-card">
+            <div>
+              <h4>Corporate Governance</h4>
+              <p>Board advisory, governance framework design, policy formulation, and institutional risk oversight.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Corporate Governance')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Organizational Development (OD)</h4>
+              <p>End-to-end change management strategies, Human Resources architecture, and talent optimization models.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Organizational Development (OD)')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Ethics & Compliance</h4>
+              <p>Comprehensive compliance reviews, codes of conduct formulation, and company-wide ethics training programs.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Ethics & Compliance')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>ESG Consulting</h4>
+              <p>Guidance on Environmental, Social, and Governance frameworks, sustainability reporting, and responsible corporate citizenship.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('ESG Consulting')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Crisis Management</h4>
+              <p>Proactive resilience frameworks and high-stakes reputation management during critical organizational events.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Crisis Management')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Business Advisory</h4>
+              <p>High-level strategic planning, operational restructuring, and Corporate Social Responsibility (CSR) project delivery.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Business Advisory')">Inquire About This Service →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVISION 02 -->
+      <div class="division-block" data-category="digital" id="div-digital">
+        <div class="division-banner">
+          <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=800&q=80" alt="Digital Solutions & Media Production" />
+          <div class="division-banner-info">
+            <span>Division 02</span>
+            <h3>Digital Solutions & Media Production</h3>
+            <p>High-impact digital experiences that amplify market presence, engage stakeholders, and accelerate online acquisition.</p>
+          </div>
+        </div>
+        <div class="subservices-grid">
+          <div class="subservice-card">
+            <div>
+              <h4>Web Design & Development</h4>
+              <p>Full-stack development tailored for functional user experiences, security, and brand elegance.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Web Design & Development')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>SEO & Performance Marketing</h4>
+              <p>Search engine optimization, pay-per-click (PPC) advertising campaigns, and funnel conversion strategy.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('SEO & Performance Marketing')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Social Media & Direct Marketing</h4>
+              <p>Targeted content strategies, multi-channel social media management, and automated email workflows.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Social Media & Direct Marketing')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Branding & Visual Identity</h4>
+              <p>Brand strategy, visual positioning, identity systems, logos, and comprehensive brand voice guidelines.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Branding & Visual Identity')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Multimedia Production</h4>
+              <p>Professional photography and cinematic videography for marketing assets, adverts, and brand stories.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Multimedia Production')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Content Strategy</h4>
+              <p>Cross-platform content creation, strategic storytelling, and structured distribution planning.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Content Strategy')">Inquire About This Service →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVISION 03 -->
+      <div class="division-block" data-category="empowerment" id="div-empowerment">
+        <div class="division-banner">
+          <img src="https://images.unsplash.com/photo-1475721027785-f74eccf877e2?auto=format&fit=crop&w=800&q=80" alt="Empowerment, Keynotes & Community Development" />
+          <div class="division-banner-info">
+            <span>Division 03</span>
+            <h3>Empowerment, Keynotes & Community Development</h3>
+            <p>Empowering human capital through targeted personal growth initiatives, leadership alignment, and community enablement.</p>
+          </div>
+        </div>
+        <div class="subservices-grid">
+          <div class="subservice-card">
+            <div>
+              <h4>Keynotes & Workshops</h4>
+              <p>Interactive corporate training, executive retreats, and motivational keynote addresses.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Keynotes & Workshops')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Executive & Personal Coaching</h4>
+              <p>One-on-one executive mentoring, team coaching, and structured community empowerment workshops.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Executive & Personal Coaching')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Digital Media & Talk Shows</h4>
+              <p>Educational YouTube talk show production, digital panel hosting, and thought-leadership media engagement.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Digital Media & Talk Shows')">Inquire About This Service →</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- DIVISION 04 -->
+      <div class="division-block" data-category="publishing" id="div-publishing">
+        <div class="division-banner">
+          <img src="https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?auto=format&fit=crop&w=800&q=80" alt="Publishing & Educational Architecture" />
+          <div class="division-banner-info">
+            <span>Division 04</span>
+            <h3>Publishing & Educational Architecture</h3>
+            <p>Serving as a knowledge engine, producing authoritative content and scalable digital learning systems.</p>
+          </div>
+        </div>
+        <div class="subservices-grid">
+          <div class="subservice-card">
+            <div>
+              <h4>Corporate Publications</h4>
+              <p>Industry whitepapers, specialized journals, corporate newsletters, and annual reports.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Corporate Publications')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>E-Learning Platforms</h4>
+              <p>Custom Learning Management Systems (LMS), interactive digital courses, and digital libraries.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('E-Learning Platforms')">Inquire About This Service →</button>
+          </div>
+          <div class="subservice-card">
+            <div>
+              <h4>Research & Advisory Papers</h4>
+              <p>Development of technical manuscripts, empirical case studies, and industry best-practice manuals.</p>
+            </div>
+            <button class="inquire-mini-btn" onclick="inquireService('Research & Advisory Papers')">Inquire About This Service →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= 4. CONTACTS PAGE (CORRECTED DETAILS) ================= -->
+  <main id="page-contacts" class="page-section">
+    <section class="bg-soft">
+      <div class="container" style="padding-bottom: 36px;">
+        <div class="section-header" style="margin-bottom: 0;">
+          <span class="badge">Get In Touch</span>
+          <h2>Contact Optimore Solutions Ltd</h2>
+          <p>Ready to elevate your SME or organization? Reach out to our Nairobi team for strategic advisory, branding, digital marketing, or training inquiries.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="contact-grid">
+        <!-- Verified Contact Details -->
+        <div class="info-card">
+          <h3>OPTIMORE SOLUTIONS LTD</h3>
+          <p class="tagline">"Magic in every step"</p>
+
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-details">
+              <strong>Postal Address</strong>
+              <p>P.O. Box 42254-00100, Nairobi</p>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📞</div>
+            <div class="info-details">
+              <strong>Direct Telephone</strong>
+              <a href="tel:+254721214422">+254 721214422</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">✉️</div>
+            <div class="info-details">
+              <strong>Email Address</strong>
+              <a href="mailto:optimoresolutions@gmail.com">optimoresolutions@gmail.com</a>
+              <br />
+              <button type="button" class="copy-btn" onclick="copyEmail()">Copy Email</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Direct Email Inquiry Form -->
+        <div class="form-card">
+          <h3>Send Us an Inquiry</h3>
+          <form id="inquiryForm" onsubmit="sendEmail(event)">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="fullName">Your Name *</label>
+                <input type="text" id="fullName" placeholder="e.g. Jane Kamau" required />
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" placeholder="e.g. +254 7XX XXX XXX" required />
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="company">Business / SME Name</label>
+                <input type="text" id="company" placeholder="Your organization name" />
+              </div>
+              <div class="form-group">
+                <label for="serviceSelect">Service of Interest *</label>
+                <select id="serviceSelect" required>
+                  <option value="">-- Select a Service --</option>
+                  <optgroup label="01. Strategic & Management Consultancy">
+                    <option value="Corporate Governance">Corporate Governance</option>
+                    <option value="Organizational Development (OD)">Organizational Development (OD)</option>
+                    <option value="Ethics & Compliance">Ethics & Compliance</option>
+                    <option value="ESG Consulting">ESG Consulting</option>
+                    <option value="Crisis Management">Crisis Management</option>
+                    <option value="Business Advisory">Business Advisory</option>
+                  </optgroup>
+                  <optgroup label="02. Digital Solutions & Media Production">
+                    <option value="Web Design & Development">Web Design & Development</option>
+                    <option value="SEO & Performance Marketing">SEO & Performance Marketing</option>
+                    <option value="Social Media & Direct Marketing">Social Media & Direct Marketing</option>
+                    <option value="Branding & Visual Identity">Branding & Visual Identity</option>
+                    <option value="Multimedia Production">Multimedia Production</option>
+                    <option value="Content Strategy">Content Strategy</option>
+                  </optgroup>
+                  <optgroup label="03. Empowerment, Keynotes & Community">
+                    <option value="Keynotes & Workshops">Keynotes & Workshops</option>
+                    <option value="Executive & Personal Coaching">Executive & Personal Coaching</option>
+                    <option value="Digital Media & Talk Shows">Digital Media & Talk Shows</option>
+                  </optgroup>
+                  <optgroup label="04. Publishing & Educational Architecture">
+                    <option value="Corporate Publications">Corporate Publications</option>
+                    <option value="E-Learning Platforms">E-Learning Platforms</option>
+                    <option value="Research & Advisory Papers">Research & Advisory Papers</option>
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="message">How Can We Help You? *</label>
+              <textarea id="message" rows="4" placeholder="Tell us briefly about your project or goals..." required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Send Message to Optimore Solutions</button>
+            <div class="status-msg" id="statusMsg">
+              Opening your email client addressed to optimoresolutions@gmail.com...
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= FOOTER ================= -->
+  <footer>
+    <div class="footer-grid">
+      <div>
+        <h4>OPTIMORE SOLUTIONS LTD</h4>
+        <p style="font-size: 14px; margin-bottom: 12px;">
+          Bridging the gap between traditional corporate governance, strategic advisory, and modern digital execution. <em>Magic in every step.</em>
+        </p>
+        <p style="font-size: 13.5px; color: #94A3B8;">
+          P.O. Box 42254-00100, Nairobi | Tel: +254 721214422
+        </p>
+      </div>
+      <div>
+        <h4>Quick Navigation</h4>
+        <ul class="footer-links">
+          <li><button onclick="navigateTo('home')">Home</button></li>
+          <li><button onclick="navigateTo('about')">About Us</button></li>
+          <li><button onclick="navigateTo('services')">Services</button></li>
+          <li><button onclick="navigateTo('contacts')">Contacts</button></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Core Divisions</h4>
+        <ul class="footer-links">
+          <li><button onclick="navigateTo('services', 'consultancy')">01. Strategic Consultancy</button></li>
+          <li><button onclick="navigateTo('services', 'digital')">02. Branding & Digital Media</button></li>
+          <li><button onclick="navigateTo('services', 'empowerment')">03. Keynotes & Coaching</button></li>
+          <li><button onclick="navigateTo('services', 'publishing')">04. Publishing & E-Learning</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      © 2026 Optimore Solutions Ltd. All Rights Reserved. | optimoresolutions@gmail.com
+    </div>
+  </footer>
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+    // Page Navigation
+    function navigateTo(pageId, categoryFilter = null) {
+      document.querySelectorAll('.page-section').forEach(sec => sec.classList.remove('active'));
+      document.getElementById('page-' + pageId).classList.add('active');
+
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-page') === pageId);
+      });
+
+      document.getElementById('navLinks').classList.remove('open');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      if (pageId === 'services' && categoryFilter) {
+        const targetBtn = Array.from(document.querySelectorAll('.filter-btn')).find(b =>
+          b.getAttribute('onclick').includes(`'${categoryFilter}'`)
+        );
+        if (targetBtn) filterServices(categoryFilter, targetBtn);
+      }
+    }
+
+    function toggleMobileMenu() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    // Hero Carousel
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const tabs = document.querySelectorAll('.carousel-tab');
+    let slideInterval = setInterval(() => changeSlide(1), 6000);
+
+    function showSlide(index) {
+      currentSlide = (index + slides.length) % slides.length;
+      slides.forEach((s, i) => s.classList.toggle('active', i === currentSlide));
+      tabs.forEach((t, i) => t.classList.toggle('active', i === currentSlide));
+    }
+
+    function changeSlide(step) {
+      showSlide(currentSlide + step);
+      resetTimer();
+    }
+
+    function goToSlide(index) {
+      showSlide(index);
+      resetTimer();
+    }
+
+    function resetTimer() {
+      clearInterval(slideInterval);
+      slideInterval = setInterval(() => changeSlide(1), 6000);
+    }
+
+    // Services Filtering
+    function filterServices(category, btnElement) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      document.querySelectorAll('.division-block').forEach(block => {
+        if (category === 'all' || block.getAttribute('data-category') === category) {
+          block.style.display = 'block';
+        } else {
+          block.style.display = 'none';
+        }
+      });
+    }
+
+    // Pre-select Service & Jump to Contacts
+    function inquireService(serviceName) {
+      navigateTo('contacts');
+      const select = document.getElementById('serviceSelect');
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === serviceName) {
+          select.selectedIndex = i;
+          break;
+        }
+      }
+    }
+
+    // Copy Email
+    function copyEmail() {
+      navigator.clipboard.writeText("optimoresolutions@gmail.com");
+      const btn = document.querySelector(".copy-btn");
+      btn.textContent = "Copied!";
+      setTimeout(() => { btn.textContent = "Copy Email"; }, 2000);
+    }
+
+    // Send Inquiry via Mailto
+    function sendEmail(e) {
+      e.preventDefault();
+      const name = document.getElementById("fullName").value;
+      const phone = document.getElementById("phone").value;
+      const company = document.getElementById("company").value || "N/A";
+      const service = document.getElementById("serviceSelect").value;
+      const message = document.getElementById("message").value;
+
+      const subject = encodeURIComponent(`Website Inquiry: ${service} - ${name}`);
+      const body = encodeURIComponent(
+        `Name: ${name}\n` +
+        `Phone: ${phone}\n` +
+        `Business/SME: ${company}\n` +
+        `Service Interested In: ${service}\n\n` +
+        `Message:\n${message}`
+      );
+
+      document.getElementById("statusMsg").style.display = "block";
+      window.location.href = `mailto:optimoresolutions@gmail.com?subject=${subject}&body=${body}`;
+    }
+  </script>
+
+</body>
+</html>
