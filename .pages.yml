@@ -1,0 +1,45 @@
+media:
+  input: images
+  output: /images
+
+content:
+  - name: blog
+    label: Blog Posts
+    path: content/blog
+    type: collection
+    fields:
+      - name: title
+        label: Post Title
+        type: string
+        required: true
+      - name: date
+        label: Publish Date
+        type: date
+        required: true
+      - name: cover
+        label: Cover Image
+        type: image
+      - name: summary
+        label: Short Summary (for SEO)
+        type: text
+      - name: body
+        label: Blog Content
+        type: rich-text
+
+  - name: home
+    label: Homepage Settings
+    path: content/home.json
+    type: file
+    fields:
+      - name: hero_tag
+        label: Top Orange Tag
+        type: string
+      - name: hero_headline
+        label: Main Headline
+        type: string
+      - name: contact_email
+        label: Contact Email
+        type: string
+      - name: contact_phone
+        label: Phone Number
+        type: string
